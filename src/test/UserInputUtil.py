@@ -67,7 +67,7 @@ def getUserInputFromList(inputMessage, optionArray):
 def getUserTimeInput(inputMessage):
     userInput = ''
     
-    regexString = '0[1-9]|1[0-2]:[0-5][0-9] [AM|PM]'
+    regexString = '^0[1-9]{1}|1[0-2]{1}:[0-5]{1}[0-9]{1} [AM|PM]{1}'
     regObj = re.compile(regexString)
     
     matches = regObj.findall(userInput)
@@ -81,8 +81,9 @@ def getUserTimeInput(inputMessage):
         if len(matches) == 0:
             print('Input must match regex: ' + regexString + '\n')
         else:
+            print('Valid input: ' + str(userInput) + ' matches: ' + str(matches))
             userInput = datetime.strptime(userInput, '%I:%M %p').time()
-            print(userInput)
+            print('Confirmed time: ' + str(userInput))
     
     return userInput
 
